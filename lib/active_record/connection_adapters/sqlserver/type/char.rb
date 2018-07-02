@@ -21,7 +21,7 @@ module ActiveRecord
           end
 
           def quoted(value)
-            return value.quoted_id if value.respond_to?(:quoted_id)
+            return value.quoted_id if ActiveRecord.version < Gem::Version.new('5.1.0') && value.respond_to?(:quoted_id)
             Utils.quote_string_single(value)
           end
 
